@@ -10,31 +10,38 @@ export default function App() {
 
   const [people, setPeople] = useState([]);
 
-  // im gonna edit some stuff if thats ok
-  // i know whats goin on with it
   let url = "https://suce.dev/unsplash.json"
 
-  async function getImages() {
-    while (people.length > 0) {
-      people.pop();
+  async function downloadImages() {
+    const response = await fetch(url);
+    const responseJson = await response.json();
+
+    const result = [];
+    if (!responseJson.results) {
+      throw new Error(`got unexpected response JSON:\n${JSON.stringify(responseJson, null, 4)}`);
     }
-    return fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        responseJson.results.forEach(photo => {
-          photo.key = Math.floor(Math.random() * Math.floor(9999999)).toString();
-          people.push(photo);
-          console.log('Added photo');
-        });
-        console.log('Added all photos');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+
+    responseJson.results.forEach(photo => {
+      photo.key = Math.floor(Math.random() * Math.floor(9999999)).toString();
+      result.push(photo);
+      console.log('Added photo');
+    });
+
+    console.log('Finished downloading photos');
+    return result;
+  }
+
+  async function getImages() {
+    const images = await downloadImages();
+    setPeople(images);
   }
 
   useEffect(() => {
-    getImages().then(console.log).catch(console.error);
+    getImages()
+      .then(() => {
+        console.log('updated images');
+      })
+      .catch(console.error);
   }, []);
 
   return (
