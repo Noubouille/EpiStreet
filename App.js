@@ -35,6 +35,11 @@ export default function App() {
   getImages();
   getImages();
   getImages();
+  getImages();
+  getImages();
+  getImages();
+  getImages();
+  getImages();
   return (
     <React.Fragment>
       <StatusBar hidden />
