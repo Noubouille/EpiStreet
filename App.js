@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Linking, View, Text, Image, FlatList, StatusBar, ImageBackground } from 'react-native';
+import { StyleSheet, Linking, View, Text, Share, FlatList, StatusBar, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 // import Search from './components/Search';
 import fetch from 'node-fetch';
@@ -31,6 +31,10 @@ export default function App() {
   }
 
   getImages();
+  getImages();
+  getImages();
+  getImages();
+  getImages();
   return (
     <React.Fragment>
       <StatusBar hidden />
@@ -60,11 +64,18 @@ export default function App() {
                     </Text>
                   </View>
                 </View>
-                <Button
-                  onPress={ ()=> {Linking.openURL(item.urls.raw)}}
-                  icon={<Icon name='export' type='antdesign' color='#ffffff' />}
-                  buttonStyle={{borderRadius: 0, marginLeft: 20, marginRight: 20, marginBottom: 0}}
-                  title='  VIEW' />
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', alignContent: 'center'}}>
+                  <Button
+                    onPress={ ()=> {Linking.openURL(item.urls.raw)}}
+                    icon={<Icon name='export' type='antdesign' color='#ffffff' />}
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='  VIEW' />
+                  <Button
+                    onPress={ ()=> {Share.share({message: item.description ?? item.alt_description + ' ' + item.links.html});}}
+                    icon={<Icon name='sharealt' type='antdesign' color='#ffffff' />}
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='  SHARE' />
+                  </View>
               </Card>
             )}
           />
