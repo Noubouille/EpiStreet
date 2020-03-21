@@ -31,6 +31,8 @@
     "android": {
       "package": "com.yourcompany.yourappname",
       "versionCode": 1
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/Noubouille/Epitech-Jam"
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Linking, View, Text, Share, FlatList, StatusBar, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 // import Search from './components/Search';
@@ -9,11 +9,12 @@ import { render } from 'react-dom';
 export default function App() {
 
   const [people, setPeople] = useState([]);
-  var i = 0;
 
-  let url = "https://api.unsplash.com/search/photos/?client_id=HPAn2XN9u7_5sHR6ofigmyTvFLK9t7UjS2M6XUOP_7Y&query=street+art&page=1&per_page=10"
+  // im gonna edit some stuff if thats ok
+  // i know whats goin on with it
+  let url = "https://suce.dev/unsplash.json"
 
-  function getImages() {
+  async function getImages() {
     while (people.length > 0) {
       people.pop();
     }
@@ -23,23 +24,19 @@ export default function App() {
         responseJson.results.forEach(photo => {
           photo.key = Math.floor(Math.random() * Math.floor(9999999)).toString();
           people.push(photo);
+          console.log('Added photo');
         });
+        console.log('Added all photos');
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  getImages();
-  getImages();
-  getImages();
-  getImages();
-  getImages();
-  getImages();
-  getImages();
-  getImages();
-  getImages();
-  getImages();
+  useEffect(() => {
+    getImages().then(console.log).catch(console.error);
+  }, []);
+
   return (
     <React.Fragment>
       <StatusBar hidden />
@@ -76,7 +73,7 @@ export default function App() {
                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                     title='  VIEW' />
                   <Button
-                    onPress={ ()=> {Share.share({message: item.description ?? item.alt_description + ' ' + item.links.html});}}
+                    onPress={ ()=> {Share.share({message: item.links.html});}}
                     icon={<Icon name='sharealt' type='antdesign' color='#ffffff' />}
                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                     title='  SHARE' />
