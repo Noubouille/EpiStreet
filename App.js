@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Linking, View, Text, Image, FlatList, StatusBar, ImageBackground } from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
-import Header from './components/Header';
 // import Search from './components/Search';
 import fetch from 'node-fetch';
 import moment from 'moment';
@@ -45,7 +44,7 @@ export default function App() {
             initialNumToRender={2}
             renderItem={({item}) => (
               <Card
-                style={{backgroundColor: item.color, marginBottom: 20}}
+                style={{backgroundColor: item.color}}
                 title={"🌎 " + item.user.location}
                 image={{uri: item.urls.small}}>
                 <View style={{marginBottom: 20}}>
@@ -69,6 +68,7 @@ export default function App() {
               </Card>
             )}
           />
+            <View style={{marginBottom: 20}}></View>
         </View>
       </ImageBackground>
     </React.Fragment>
