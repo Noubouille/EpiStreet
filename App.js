@@ -10,7 +10,7 @@ export default function App() {
 
   const [people, setPeople] = useState([]);
 
-  let url = "https://suce.dev/unsplash.json"
+  let url = "https://api.unsplash.com/search/photos/?client_id=HPAn2XN9u7_5sHR6ofigmyTvFLK9t7UjS2M6XUOP_7Y&per_page=10&page=1&query=street+art"
 
   async function downloadImages() {
     const response = await fetch(url);
