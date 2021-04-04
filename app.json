@@ -1,9 +1,9 @@
 {
   "expo": {
+    "sdkVersion": "40.0.0",
     "name": "EpiStreet",
     "slug": "epistreet",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
